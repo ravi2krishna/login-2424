@@ -1,0 +1,16 @@
+# Pod Manifest File For Multi Container
+# This will give an error as containers in same pod share netwroking & storage
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-pod
+spec:
+  containers:
+  - name: c1
+    image: nginx
+    ports:
+    - containerPort: 80 
+  - name: c2
+    image: nginx
+    ports:
+    - containerPort: 80 
