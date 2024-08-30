@@ -1,0 +1,35 @@
+# Deployment Template
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: login
+spec:
+  # 1 Pod should exist at all times.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: login
+  template:
+    metadata:
+      labels:
+        app: login
+    spec:
+      containers:
+      - name: login
+        image: ravi2krishna/login-2424
+        ports:
+        - containerPort: 80
+---
+# Service Template
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-svc
+spec:
+  type: NodePort
+  selector:
+    app: login
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30007
